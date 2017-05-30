@@ -116,3 +116,5 @@ Note: 3 types of commands feature, enhance and bugfix
 2. git add . 
 3. git commit -m 'text'
 4. git push -u origin enhance/readme
+
+5. git checkout master 
