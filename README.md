@@ -26,8 +26,9 @@ Ruby version 2.4.1
 2.Install gem dependencies
 
   ```bash
-  cd ac_project_sample
+  cd twitter_clone
   bundle install
+  #bundle dependencies would be available on gemfile
   ```
 
 3. Setup Database
@@ -35,6 +36,7 @@ Ruby version 2.4.1
   ```bash
   rake db:create db:migrate
   ```
+  _____________________________________________________>30.05.17
 
 4. Start the application
 
