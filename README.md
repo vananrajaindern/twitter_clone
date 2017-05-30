@@ -103,3 +103,16 @@ Things you may want to cover:
 * ...
 # twitter_clone
 
+
+
+
+
+
+###Terminal commands for github for branching
+
+Note: 3 types of commands feature, enchance and bugfreeze
+
+1. git checkout -b enhance/readme
+2. git add . 
+3. git commit -m 'text'
+4. git push -u origin enhance/readme
