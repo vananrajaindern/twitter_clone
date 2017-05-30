@@ -110,7 +110,7 @@ Things you may want to cover:
 
 ###Terminal commands for github for branching
 
-Note: 3 types of commands feature, enchance and bugfreeze
+Note: 3 types of commands feature, enhance and bugfix
 
 1. git checkout -b enhance/readme
 2. git add . 
