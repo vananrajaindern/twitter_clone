@@ -49,5 +49,12 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :test do
+  # Collection of testing matchers extracted from Shoulda
+  gem 'shoulda-matchers'
+  # RSpec for Rails-3+
+  gem 'rspec-rails', '~> 3.5'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
