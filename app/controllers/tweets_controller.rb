@@ -1,7 +1,6 @@
 class TweetsController < ApplicationController
 
   def index
-    byebug
     @tweets = Tweet.all
   end
 
