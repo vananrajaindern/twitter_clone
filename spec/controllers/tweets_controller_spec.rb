@@ -2,9 +2,11 @@ require 'rails_helper'
 
 RSpec.describe TweetsController, type: :controller do
 
+ let(:user) { create(:user) }
+
   describe 'GET #index' do
 
-    let(:user) { create(:user) }
+  
     let!(:tweets) { create_list(:tweet, 3, user: user) }
 
     before { get :index }
@@ -14,8 +16,6 @@ RSpec.describe TweetsController, type: :controller do
   end
 
   describe 'GET #new' do
-
-    let(:user) { create(:user) }
 
     before do
       sign_in user
@@ -30,12 +30,11 @@ RSpec.describe TweetsController, type: :controller do
 
   describe 'POST #create' do
 
-    let(:user) { create(:user) }
-
     before do
       sign_in user
 
       post :create, params: { tweet: params }
+      git
     end
 
     context 'when tweet#save passes' do
