@@ -33,9 +33,13 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Flexible authentication solution for Rails with Warden
 gem 'devise'
+# Official Sass port of Bootstrap 2 and 3
 gem 'bootstrap-sass', '~> 3.3.6'
+# Forms made easy for Rails! It's tied to a simple DSL, with no opinion on markup
 gem 'simple_form'
+# A gem to automate using jQuery with Rails
 gem 'jquery-rails'
 
 group :development, :test do
@@ -57,6 +61,10 @@ group :test do
   gem 'shoulda-matchers'
   # RSpec for Rails-3+
   gem 'rspec-rails', '~> 3.5'
+  # Brings back `assigns` and `assert_template` to your Rails tests
+  gem 'rails-controller-testing'
+  # Factory Girl ♥ Rails
+  gem 'factory_girl_rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
