@@ -2,9 +2,11 @@ require 'rails_helper'
 
 RSpec.describe TweetsController, type: :controller do
 
+  let(:user) { create(:user) }
+  before { sign_in user }
+
   describe 'GET #index' do
 
-    let(:user) { create(:user) }
     let!(:tweets) { create_list(:tweet, 3, user: user) }
 
     before { get :index }
@@ -15,14 +17,7 @@ RSpec.describe TweetsController, type: :controller do
 
   describe 'GET #new' do
 
-    let(:user) { create(:user) }
-
-    before do
-      sign_in user
-
-      get :new
-
-    end
+    before { get :new }
 
     it { expect(assigns(:tweet)).to be_a_new_record }
 
@@ -30,13 +25,7 @@ RSpec.describe TweetsController, type: :controller do
 
   describe 'POST #create' do
 
-    let(:user) { create(:user) }
-
-    before do
-      sign_in user
-
-      post :create, params: { tweet: params }
-    end
+    before { post :create, params: { tweet: params } }
 
     context 'when tweet#save passes' do
 
@@ -53,6 +42,32 @@ RSpec.describe TweetsController, type: :controller do
       it { expect(response).to render_template(:new) }
 
     end
+
+  end
+
+  describe 'GET #edit' do
+
+    let(:owner) { create(:user) }
+    let(:tweet) { create(:tweet, user: owner) }
+
+    before { get :edit, params: { id: tweet } }
+
+    context 'when nonowner accesses edit' do
+
+      it { expect(response).to redirect_to tweets_path }
+
+    end
+
+  end
+
+  describe 'PUT #update' do
+
+    let(:tweet) { create(:tweet, user: user) }
+
+    before { put :update, params: { id: tweet, tweet: { text: tweet.text + 'Edited' } } }
+
+    it { expect(Tweet.find(tweet.id).text.last(6)).to eq('Edited') }
+    it { expect(response).to redirect_to tweets_path }
 
   end
 

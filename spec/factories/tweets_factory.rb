@@ -7,5 +7,6 @@ FactoryGirl.define do
     trait :invalid do
       text nil
     end
+    
   end
 end
