@@ -3,7 +3,7 @@
 <ul>
 <% @tweets.each do |tweet| %>
   <li>
-    User: <%= tweet.user.email %>
+    User: <%= link_to tweet.user.email, profile_path(tweet.user) %>
     Tweet: <%= tweet.text %>
 
     <% if current_user.id == tweet.user.id %>
@@ -13,7 +13,7 @@
     <% end %>
 
   </li>
-  <% end %>
+<% end %>
 </ul>
 
 <%= link_to "New Tweet", new_tweet_path %>
