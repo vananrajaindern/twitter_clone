@@ -1,19 +1,28 @@
 <h1>Welcome to our twitter clone! </h1>
 
-<ul>
 <% @tweets.each do |tweet| %>
-  <li>
-    User: <%= link_to tweet.user.email, profile_path(tweet.user) %>
-    Tweet: <%= tweet.text %>
+  <div>
+    <strong><%= tweet.text %></strong><br/>
+    by <%= link_to tweet.user.email, profile_path(tweet.user) %>
+    at <%= tweet.updated_at %><br/>
 
     <% if current_user.id == tweet.user.id %>
-      <%= link_to "Edit", edit_tweet_path(tweet) %>
-      <%= link_to "Delete", tweet_path(tweet), method: :delete %>
-      <!-- , data: { confirm: "Are you sure you wish to permanently delete this tweet?" } %> -->
+    <%= link_to "Edit", edit_tweet_path(tweet) %>
+    <%= link_to "Delete", tweet_path(tweet), method: :delete %>
+    <!-- , data: { confirm: "Are you sure you wish to permanently delete this tweet?" } %> -->
     <% end %>
-
-  </li>
+  </div>
+  <br/>
 <% end %>
-</ul>
 
-<%= link_to "New Tweet", new_tweet_path %>
+<div>
+  <%= link_to "New Tweet", new_tweet_path %>
+</div>
+
+<div>
+  <h2>Registered Users:</h2>
+  <% @users.each do |user| %>
+    <%= link_to user.email, profile_path(user) %>
+    <br/>
+  <% end %>
+</div>
