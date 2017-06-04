@@ -1,5 +1,9 @@
 <h1>Welcome to our twitter clone! </h1>
 
+<div>
+  <h2><%= link_to "Add a tweet!", new_tweet_path %></h2>
+</div>
+
 <% @tweets.each do |tweet| %>
   <div>
     <strong><%= tweet.text %></strong><br/>
@@ -14,10 +18,6 @@
   </div>
   <br/>
 <% end %>
-
-<div>
-  <%= link_to "New Tweet", new_tweet_path %>
-</div>
 
 <div>
   <h2>Registered Users:</h2>
