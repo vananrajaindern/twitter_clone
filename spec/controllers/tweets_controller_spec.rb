@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe TweetsController, type: :controller do
 
   let(:user) { create(:user) }
+
   before { sign_in user }
 
   describe 'GET #index' do
@@ -67,6 +68,17 @@ RSpec.describe TweetsController, type: :controller do
     before { put :update, params: { id: tweet, tweet: { text: tweet.text + 'Edited' } } }
 
     it { expect(Tweet.find(tweet.id).text.last(6)).to eq('Edited') }
+    it { expect(response).to redirect_to tweets_path }
+
+  end
+
+  describe 'DELETE #destroy' do
+
+    let(:tweet) { create(:tweet, user: user) }
+
+    before { delete :destroy, params: { id: tweet } }
+
+    it { expect(Tweet.count).to eq(0) }
     it { expect(response).to redirect_to tweets_path }
 
   end
