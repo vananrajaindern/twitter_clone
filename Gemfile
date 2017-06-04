@@ -56,6 +56,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Guard::RSpec automatically run your specs (much like autotest)
   gem 'guard-rspec', require: false
+  # Guard::LiveReload automatically reloads your browser when 'view' files are modified.
+  gem 'guard-livereload', '~> 2.5', '>= 2.5.2'
 end
 
 group :test do
