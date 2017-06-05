@@ -1,0 +1,12 @@
+<h1>User: <%= @tweet.user.email %></h1>
+
+<h2>Tweet:</h2>
+<%= @tweet.text %><br/>
+
+<h3>Replies:</h3>
+<% @tweet.comments.each do |comment| %>
+  <strong> <%= comment.text %> </strong> by <%= comment.user.email %> on <%= comment.updated_at %>
+  <br/>
+<% end %>
+
+<%= link_to "Comment on this tweet!", new_tweet_comment_path(@tweet.id) %>

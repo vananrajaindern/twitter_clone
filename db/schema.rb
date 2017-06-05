@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20170605055324) do
     t.index ["tweet_id"], name: "index_likes_on_tweet_id"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.bigint "tweet_id"
+    t.bigint "user_id"
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tweet_id"], name: "index_comments_on_tweet_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "tweets", force: :cascade do |t|
     t.bigint "user_id"
     t.string "text"
@@ -53,5 +63,7 @@ ActiveRecord::Schema.define(version: 20170605055324) do
   end
 
   add_foreign_key "likes", "tweets"
+  add_foreign_key "comments", "tweets"
+  add_foreign_key "comments", "users"
   add_foreign_key "tweets", "users"
 end

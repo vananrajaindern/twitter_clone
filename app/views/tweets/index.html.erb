@@ -6,7 +6,7 @@
 
 <% @tweets.each do |tweet| %>
   <div>
-    <strong><%= tweet.text %></strong><br/>
+    <strong><%= link_to tweet.text, tweet_path(tweet) %></strong><br/>
     by <%= link_to tweet.user.email, profile_path(tweet.user) %>
     at <%= tweet.updated_at %><br/>
 
