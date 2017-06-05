@@ -9,10 +9,12 @@ RSpec.describe TweetsController, type: :controller do
   describe 'GET #index' do
 
     let!(:tweets) { create_list(:tweet, 3, user: user) }
+    let!(:users) { create_list(:user, 2) }
 
     before { get :index }
 
     it { expect(assigns(:tweets)).to eq(tweets) }
+    it { expect(User.count).to eq(3) }
 
   end
 

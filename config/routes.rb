@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   resources :tweets, except: [ :show ]
 
+  resources :profiles, only: [ :show ]
+
 end
