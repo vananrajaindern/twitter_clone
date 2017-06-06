@@ -18,6 +18,16 @@ RSpec.describe TweetsController, type: :controller do
 
   end
 
+  describe 'GET #show' do
+
+    let(:tweet) { create(:tweet) }
+
+    before { get :show, params: { id: tweet } }
+
+    it { expect(assigns(:tweet)).to eq(tweet) }
+
+  end
+
   describe 'GET #new' do
 
     before { get :new }

@@ -1,0 +1,4 @@
+<% @tweet.comments.each do |comment| %>
+  <strong><%= comment.text %></strong> by <%= comment.user.email %> on <%= comment.updated_at %>
+  <br/>
+<% end %>

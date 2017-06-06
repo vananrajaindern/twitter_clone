@@ -4,9 +4,6 @@
 <%= @tweet.text %><br/>
 
 <h3>Replies:</h3>
-<% @tweet.comments.each do |comment| %>
-  <strong> <%= comment.text %> </strong> by <%= comment.user.email %> on <%= comment.updated_at %>
-  <br/>
-<% end %>
+<%= render :partial 'commentlist' %>
 
-<%= link_to "Comment on this tweet!", new_tweet_comment_path(@tweet.id) %>
+<%= link_to "Add a reply", new_tweet_comment_path(@tweet) %>

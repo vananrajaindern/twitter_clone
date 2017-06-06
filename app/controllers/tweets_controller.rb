@@ -5,23 +5,26 @@ class TweetsController < ApplicationController
   def index
     @tweets = Tweet.all
     @users = User.all
+    @tweet = Tweet.new
   end
 
   def show
     @tweet = Tweet.find(params[:id])
   end
 
-  def new
-    @tweet = Tweet.new
-  end
-
   def create
+    @tweets = Tweet.all
+    @users = User.all
     @tweet = current_user.tweets.build(tweet_params)
 
-    if @tweet.save
-      redirect_to tweets_path
-    else
-      render :new
+    respond_to do |format|
+      if @tweet.save
+        format.html { redirect_to tweets_path }
+        format.js
+      else
+        format.html { render :index }
+        format.js
+      end
     end
 
   end
@@ -51,6 +54,10 @@ class TweetsController < ApplicationController
 
   def tweet_params
     params.require(:tweet).permit(:text)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:text, :tweet_id)
   end
 
 end

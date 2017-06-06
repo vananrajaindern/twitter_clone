@@ -1,0 +1,6 @@
+if("<%= @tweet.id %>") {
+  $("#tweet-list").html("<%= j render partial: 'tweetlist' %>");
+  $("#new-tweet-form").children("#tweet_text").val("");
+} else {
+  $("#new-tweet-form-container").html("<%= j render partial: 'tweetform' %>");
+}
