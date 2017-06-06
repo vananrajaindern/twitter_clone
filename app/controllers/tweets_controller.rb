@@ -45,9 +45,14 @@ class TweetsController < ApplicationController
   end
 
   def destroy
+    @tweets = Tweet.all
     @tweet = Tweet.find(params[:id])
     @tweet.destroy
-    redirect_to tweets_path
+
+    respond_to do |format|
+      format.html { redirect_to tweets_path }
+      format.js
+    end
   end
 
   private

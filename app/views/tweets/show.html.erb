@@ -4,6 +4,6 @@
 <%= @tweet.text %><br/>
 
 <h3>Replies:</h3>
-<%= render :partial 'commentlist' %>
+<%= render partial: 'commentlist' %>
 
 <%= link_to "Add a reply", new_tweet_comment_path(@tweet) %>
