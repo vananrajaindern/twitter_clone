@@ -15,6 +15,7 @@ RSpec.describe TweetsController, type: :controller do
 
     it { expect(assigns(:tweets)).to eq(tweets) }
     it { expect(User.count).to eq(3) }
+    it { expect(assigns(:tweet)).to be_a_new_record }
 
   end
 
@@ -28,31 +29,53 @@ RSpec.describe TweetsController, type: :controller do
 
   end
 
-  describe 'GET #new' do
-
-    before { get :new }
-
-    it { expect(assigns(:tweet)).to be_a_new_record }
-
-  end
-
   describe 'POST #create' do
 
-    before { post :create, params: { tweet: params } }
+    context 'when format JS' do
 
-    context 'when tweet#save passes' do
+      before { post :create, xhr: true, params: { tweet: params } }
 
-      let(:params) { attributes_for(:tweet) }
+      context 'when tweet#save passes' do
 
-      it { expect(response).to redirect_to tweets_path }
+        let(:params) { attributes_for(:tweet) }
+
+        it { expect(response).to render_template(:create) }
+        it { expect(Tweet.count).to eq(1) }
+
+      end
+
+      context 'when tweet#save fails' do
+
+        let(:params) { attributes_for(:tweet, :invalid) }
+
+        it { expect(response).to render_template(:create) }
+        it { expect(Tweet.count).to eq(0) }
+
+      end
 
     end
 
-    context 'when tweet#save fails' do
+    context 'when format HTML' do
 
-      let(:params) { attributes_for(:tweet, :invalid) }
+      before { post :create, params: { tweet: params } }
 
-      it { expect(response).to render_template(:new) }
+      context 'when tweet#save passes' do
+
+        let(:params) { attributes_for(:tweet) }
+
+        it { expect(response).to redirect_to tweets_path }
+        it { expect(Tweet.count).to eq(1) }
+
+      end
+
+      context 'when tweet#save fails' do
+
+        let(:params) { attributes_for(:tweet, :invalid) }
+
+        it { expect(response).to render_template(:index) }
+        it { expect(Tweet.count).to eq(0) }
+
+      end
 
     end
 

@@ -1,4 +1,4 @@
-<% @tweets.each do |tweet| %>
+<% @tweets.order('created_at DESC').each do |tweet| %>
   <div>
     <strong><%= link_to tweet.text, tweet_path(tweet) %></strong><br/>
     by <%= link_to tweet.user.email, profile_path(tweet.user) %>

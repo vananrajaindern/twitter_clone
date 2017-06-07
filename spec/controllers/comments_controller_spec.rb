@@ -16,7 +16,7 @@ RSpec.describe CommentsController, type: :controller do
 
   describe 'POST #create' do
 
-    before { post :create, params: { comment: params } }
+    before { post :create, params: { comment: params, user_id: user, tweet_id: tweet } }
 
     context 'when comment#save passes' do
 
