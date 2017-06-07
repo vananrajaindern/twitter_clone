@@ -1,0 +1,4 @@
+<% @tweet.comments.order('created_at DESC').each do |comment| %>
+  <strong><%= comment.text %></strong> by <%= comment.user.email %> on <%= comment.updated_at %>
+  <br/>
+<% end %>

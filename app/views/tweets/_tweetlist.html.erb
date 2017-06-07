@@ -1,0 +1,14 @@
+<% @tweets.order('created_at DESC').each do |tweet| %>
+  <div>
+    <strong><%= link_to tweet.text, tweet_path(tweet) %></strong><br/>
+    by <%= link_to tweet.user.email, profile_path(tweet.user) %>
+    at <%= tweet.updated_at %><br/>
+
+    <% if current_user.id == tweet.user.id %>
+    <%= link_to "Edit", edit_tweet_path(tweet) %>
+    <%= link_to "Delete", tweet_path(tweet), method: :delete, remote: true %>
+    <!-- , data: { confirm: "Are you sure you wish to permanently delete this tweet?" } %> -->
+    <% end %>
+  </div>
+  <br/>
+<% end %>

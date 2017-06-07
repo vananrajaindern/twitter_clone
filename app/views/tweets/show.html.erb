@@ -1,0 +1,9 @@
+<h1>User: <%= @tweet.user.email %></h1>
+
+<h2>Tweet:</h2>
+<%= @tweet.text %><br/>
+
+<h3>Replies:</h3>
+<%= render partial: 'commentlist' %>
+
+<%= link_to "Add a reply", new_tweet_comment_path(@tweet) %>
