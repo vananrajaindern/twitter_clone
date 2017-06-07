@@ -1,6 +1,6 @@
 <% @tweets.order('created_at DESC').each do |tweet| %>
   <div>
-    <strong><%= link_to tweet.text, tweet_path(tweet) %></strong><br/>
+    <strong><%= link_to tweet.text, tweet_path(tweet) %></strong> (<%= tweet.comments.count%> replies) <br/>
     by <%= link_to tweet.user.email, profile_path(tweet.user) %>
     at <%= tweet.updated_at %><br/>
 
