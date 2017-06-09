@@ -1,6 +1,4 @@
-<%= form_for @tweet, remote: true, html: { id: 'new-tweet-form' } do |f| %>
-  <%= f.label :text, "Text" %>
-  <%= f.text_area :text %>
-
-  <%= f.submit "Create tweet" %>
+<%= simple_form_for @tweet, remote: true, html: { id: 'new-tweet-form' } do |f| %>
+    <%= f.text_area :text, label: false, class: "form-control" %>
+    <%= f.submit class: "btn btn-primary btn-lg btn-group-justified", id: "create-tweet-btn" %>
 <% end %>

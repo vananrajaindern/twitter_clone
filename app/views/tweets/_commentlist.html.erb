@@ -1,4 +1,6 @@
 <% @tweet.comments.order('created_at DESC').each do |comment| %>
-  <strong><%= comment.text %></strong> by <%= comment.user.email %> on <%= comment.updated_at %>
-  <br/>
+  <div class="well">
+    <strong><%= comment.text %></strong> <br/><br/>
+    posted by <%= link_to comment.user.email, profile_path(comment.tweet.user) %> on <%= comment.updated_at %>
+  </div>
 <% end %>

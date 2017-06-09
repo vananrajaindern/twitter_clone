@@ -1,10 +1,10 @@
 class Tweet < ApplicationRecord
 
   belongs_to :user
+  has_many :comments, dependent: :destroy
 
   validates :text, length: { maximum: 140 }
   validates :text, presence: true
 
-  has_many :comments
-  
+
 end
