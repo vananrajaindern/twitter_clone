@@ -5,12 +5,13 @@
      at <%= tweet.updated_at %> <br/>
 
       <div class="btn-group btn-group-justified" role="group" aria-label="...">
-        <%= link_to tweet_path(tweet) do %> <button type="button" class="btn btn-default"><%= tweet.comments.count%> replies</button> <% end %>
+        <%= link_to tweet_path(tweet) do %> <button type="button" class="btn btn-default"><%= tweet.comments.count %>
+          <%= tweet.comments.count == 1 ? 'reply' : 'replies' %></button> <% end %>
         <% if current_user.id == tweet.user.id %>
         <%= link_to edit_tweet_path(tweet) do %> <button type="button" class="btn btn-default">Edit</button> <% end %>
         <%= link_to tweet_path(tweet), method: :delete, remote: true do %> <button type="button" class="btn btn-danger pull-right">Delete</button> <% end %>
-        <% end %>
         <!-- , data: { confirm: "Are you sure you wish to permanently delete this tweet?" } %> -->
+        <% end %>
       </div>
 
   </div>
