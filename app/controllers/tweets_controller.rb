@@ -47,6 +47,7 @@ class TweetsController < ApplicationController
   def destroy
     @tweets = Tweet.all
     @tweet = Tweet.find(params[:id])
+    byebug
     @tweet.destroy
 
     respond_to do |format|
