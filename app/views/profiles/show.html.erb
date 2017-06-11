@@ -1,16 +1,28 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-md-6 col-md-offset-3 well">
+
+    <div class="col-md-2 well">
+      <h3>User stats</h3>
+      <strong><%= @user_followers.count %> followers</strong>
+      <% @user_followers.each do |follower| %>
+        <%= link_to follower.follower.email, profile_path(follower.follower) %> <br/>
+      <% end %>
+      <br/>
+      <strong>Following <%= @user_followees.count %> users</strong>
+      <% @user_followees.each do |followee| %>
+        <%= link_to followee.followee.email, profile_path(followee.followee) %> <br/>
+      <% end %>
+
+
+    </div>
+
+    <div class="col-xs-12 col-md-6 col-md-offset-1 well">
 
       <h1>User: <%= @user.email %></h1>
 
-      <% if current_user != @user %>
-        <% if @following %>
-          <%= link_to 'Unfollow user', following_path(@user), method: :delete %>
-        <% else %>
-          <%= link_to 'Follow user', followings_path(@user), method: :post %>
-        <% end %>
-      <% end %>
+      <div id="follow-button-container">
+        <%= render partial: 'follow_button' %>
+      </div>
 
       <h2>Tweets:</h2>
 

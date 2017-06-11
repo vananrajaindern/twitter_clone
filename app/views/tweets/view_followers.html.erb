@@ -1,0 +1,22 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 well">
+      <h1>Latest tweets by users you are following</h1>
+
+      <% @followers.each do |follower| %>
+        <div class="well">
+          <h2><%= link_to follower.followee.email, profile_path(follower.followee) %></h2>
+
+          <div class="well">
+            <h3><%= follower.followee.tweets.last.text %></h3>
+            tweeted on <%= follower.followee.tweets.last.created_at %>
+
+          </div>
+        </div>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>

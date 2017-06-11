@@ -47,13 +47,20 @@ class TweetsController < ApplicationController
   def destroy
     @tweets = Tweet.all
     @tweet = Tweet.find(params[:id])
-    byebug
     @tweet.destroy
 
     respond_to do |format|
       format.html { redirect_to tweets_path }
       format.js
     end
+  end
+
+  def view_followers
+    @followers = Following.where(follower_id: current_user.id)
+  end
+
+  def view_followees
+    @followees = Following.where(followee_id: current_user.id)
   end
 
   private
