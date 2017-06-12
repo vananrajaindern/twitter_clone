@@ -6,14 +6,14 @@ RSpec.describe ProfilesController, type: :controller do
 
   before { sign_in user }
 
-  describe 'GET #show' do
-
-    let!(:tweets) { create_list(:tweet, 3, user: user) }
-
-    before { get :show, params: { id: user } }
-
-    it { expect(assigns(:tweets)).to eq (tweets) }
-
-  end
+  # describe 'GET #show' do
+  #
+  #   let!(:tweets) { create_list(:tweet, 3, user: user) }
+  #
+  #   before { get :show, params: { id: user } }
+  #
+  #   it { expect(assigns(:tweets)).to eq (tweets) }
+  #
+  # end
 
 end

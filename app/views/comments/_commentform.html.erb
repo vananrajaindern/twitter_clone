@@ -1,6 +1,7 @@
-<%= form_for @comment, url: { action: "create" } do |f| %>
-  <%= f.label :text, "Text" %>
-  <%= f.text_area :text %>
+<%= simple_form_for @comment, url: { action: "create" } do |f| %>
 
-  <%= f.submit "Post comment" %>
+  <%= f.text_area :text, label: false, class: "form-control" %>
+
+  <%= f.submit class: "btn btn-primary btn-lg btn-group-justified" %>
+
 <% end %>

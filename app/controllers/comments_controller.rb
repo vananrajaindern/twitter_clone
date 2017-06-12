@@ -6,7 +6,6 @@ class CommentsController < ApplicationController
   end
 
   def create
-    
     @tweet = Tweet.find(params[:tweet_id])
     @comment = current_user.comments.build(comment_params.merge(tweet: @tweet))
 
@@ -15,7 +14,6 @@ class CommentsController < ApplicationController
     else
       render :new
     end
-
   end
 
   private

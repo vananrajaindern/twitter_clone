@@ -55,6 +55,14 @@ class TweetsController < ApplicationController
     end
   end
 
+  def view_followers
+    @followers = Following.where(follower_id: current_user.id)
+  end
+
+  def view_followees
+    @followees = Following.where(followee_id: current_user.id)
+  end
+
   private
 
   def tweet_params

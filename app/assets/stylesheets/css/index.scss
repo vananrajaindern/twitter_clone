@@ -1,0 +1,18 @@
+body {
+  background: #121E1F;
+}
+
+#create-tweet-btn {
+  border: 0;
+  box-shadow: 0 5px 0 #006599;
+  font: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 12px 20px;
+  transition: all 0.1s linear;
+}
+
+#create-tweet-btn:active {
+  box-shadow: 0 2px 0 #006599;
+  transform: translateY(3px);
+}

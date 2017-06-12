@@ -1,9 +1,20 @@
-<h1>User: <%= @tweet.user.email %></h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 well">
 
-<h2>Tweet:</h2>
-<%= @tweet.text %><br/>
+      <div class="well">
+        <h1><%= @tweet.text %></h1>
+        tweeted by <%= link_to @tweet.user.email, profile_path(@tweet.user) %> at <%= @tweet.updated_at %>
+      </div>
 
-<h3>Replies:</h3>
-<%= render partial: 'commentlist' %>
+      <div class="well">
+        <h3>Replies:</h3>
+        <%= render partial: 'commentlist' %>
 
-<%= link_to "Add a reply", new_tweet_comment_path(@tweet) %>
+        <%= button_to "Add a reply", new_tweet_comment_path(@tweet), method: :get, class: "btn btn-default" %>
+
+      </div>
+
+    </div>
+  </div>
+</div>
