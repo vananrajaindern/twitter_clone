@@ -118,22 +118,26 @@ RSpec.describe TweetsController, type: :controller do
 
   end
 
-  # describe 'GET #view_followers' do
-  #
-  #   let(:user2) { create(:user) }
-  #   let(:following) { create(:following, follower: user, followee: user2) }
-  #
-  #   it { expect(assigns(:followers)).to eq(following) }
-  #
-  # end
-  
-  # describe 'GET #view_followees' do
-  #
-  #   let(:user2) { create(:user) }
-  #   let(:following) { create(:following, follower: user2, followee: user) }
-  #
-  #   it { expect(assigns(:followees)).to eq(following) }
-  #
-  # end
+  describe 'GET #view_followers' do
+
+    let(:user2) { create(:user) }
+    let!(:following) { create(:following, follower: user, followee: user2) }
+
+    before { get :view_followers }
+
+    it { expect(assigns(:followers).first).to eq(following) }
+
+  end
+
+  describe 'GET #view_followees' do
+
+    let(:user2) { create(:user) }
+    let!(:following) { create(:following, follower: user2, followee: user) }
+
+    before { get :view_followees }
+
+    it { expect(assigns(:followees).first).to eq(following) }
+
+  end
 
 end
