@@ -22,7 +22,7 @@
 <div>
   <h2>Registered Users:</h2>
   <% @users.each do |user| %>
-    <%= link_to user.email, profile_path(user) %>
+    <%= link_to user.username, profile_path(user) %>
     <br/>
   <% end %>
 </div>

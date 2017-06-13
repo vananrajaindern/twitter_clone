@@ -6,7 +6,7 @@
 
       <% @followees.each do |followee| %>
         <div class="well">
-          <h2><%= followee.follower.email %></h2>
+          <h2><%= followee.follower.username %></h2>
 
           <div class="well">
             <h3><%= followee.follower.tweets.last.text %></h3>

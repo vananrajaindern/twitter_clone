@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ProfilesController, type: :controller do
+RSpec.describe ProfileController, type: :controller do
 
   let(:user1) { create(:user) }
   let(:user2) { create(:user) }
@@ -12,7 +12,7 @@ RSpec.describe ProfilesController, type: :controller do
     let!(:following1) { create(:following, followee: user2, follower: user1) }
     let!(:following2) { create(:following, followee: user1, follower: user2) }
 
-    before { get :show, params: { id: user2 } }
+    before { get :show, params: { username: user2.username } }
 
     it { expect(assigns(:tweets)).to eq(tweets) }
     it { expect(assigns(:following)).to eq(following1) }
