@@ -1,7 +1,7 @@
 <% @tweets.order('created_at DESC').each do |tweet| %>
    <div class="well">
      <h2> <%= tweet.text %> </h2>
-     tweeted by <%= link_to tweet.user.email, profile_path(tweet.user) %>
+     tweeted by <%= link_to tweet.user.username, profile_path(tweet.user.username) %>
      at <%= tweet.updated_at %> <br/>
 
       <div class="btn-group btn-group-justified" role="group" aria-label="...">

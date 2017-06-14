@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :profiles, only: [:show] do
+  resources :profile, param: :username, only: [:show] do
     member do
       resources :followings, only: [:create, :destroy]
     end
