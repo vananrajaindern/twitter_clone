@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3 well">
+
+      <h1>#<%= @tag.text %></h2>
+
+        <div class="well">
+          
+          <% @tweets.each do |tweet| %>
+          <h2> <%= tweet.text %> </h2>
+
+          <% tweet.tags.map(&:text).each do |tag| %>
+          <%= link_to ' #' + tag, search_tag_tweets_path(tag) %>
+          <% end %> <br/>
+
+          tweeted by <%= link_to tweet.user.username, profile_path(tweet.user.username) %>
+          at <%= tweet.updated_at %> <br/>
+          <% end %>
+
+        </div>
+
+    </div>
+  </div>
+</div>

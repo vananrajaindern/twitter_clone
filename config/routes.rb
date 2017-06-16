@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     collection do
       get :view_followers
       get :view_followees
+      get :search_tag
     end
   end
 
