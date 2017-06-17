@@ -14,11 +14,11 @@
 
          <h2> <%= tweet.text %> </h2>
 
-          Tag:<% tweet.tags.map(&:text).each do |tag| %>
+         Likes: <%= tweet.likes.count %> Tag:<% tweet.tags.map(&:text).each do |tag| %>
           <%= link_to ' #' + tag, search_tag_tweets_path(tag) %>
          <% end %> <br/>
 
-         Likes: <%= tweet.likes.count %>    Posted on <%= tweet.updated_at %> <br/>
+         Posted on <%= tweet.updated_at %> <br/>
 
 
        </div>
@@ -34,7 +34,7 @@
           <!-- , data: { confirm: "Are you sure you wish to permanently delete this tweet?" } %> -->
         <% else %>
           <% if current_user.likes?(tweet, current_user) %>
-            <%= link_to unlike_tweet_path(tweet), method: :delete, remote: true do %> <button type="button" class="btn btn-danger">You liked this! Unlike</button> <% end %>
+            <%= link_to unlike_tweet_path(tweet), method: :delete, remote: true do %> <button type="button" class="btn btn-danger">You liked this! Unlike?</button> <% end %>
           <% else %>
             <%= link_to like_tweet_path(tweet), method: :post, remote: true do %> <button type="button" class="btn btn-success">Like this tweet</button> <% end %>
           <% end %>
