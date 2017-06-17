@@ -23,11 +23,7 @@ class TweetsController < ApplicationController
     respond_to do |format|
       if @tweet.save
         @tags.each do |tag|
-          if existing_tag = Tag.find_by(text: tag)
-            
-          else
-            new_tag = @tweet.tags.create(text: tag)
-          end
+          new_tag = @tweet.tags.create(text: tag)
         end
         format.html { redirect_to tweets_path }
         format.js

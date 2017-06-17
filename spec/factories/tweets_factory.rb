@@ -7,6 +7,10 @@ FactoryGirl.define do
     trait :invalid do
       text nil
     end
-    
+
+    trait :tagged do
+      text 'text1 #tagged'
+    end
+
   end
 end
