@@ -159,4 +159,29 @@ RSpec.describe TweetsController, type: :controller do
   #
   # end
 
+  describe 'POST #like' do
+
+    let(:owner) { create(:user) }
+    let(:tweet) { create(:tweet, user: owner) }
+
+    before { post :like, params: { id: tweet } }
+
+    it { expect(Like.count).to eq(1) }
+    it { expect(response).to redirect_to tweets_path }
+
+  end
+
+  describe 'DELETE #unlike' do
+
+    let(:owner) { create(:user) }
+    let(:tweet) { create(:tweet, user: owner) }
+    let(:like) { create(:like, user: user, tweet: tweet) }
+
+    before { delete :destroy, params: { id: tweet } }
+
+    it { expect(Like.count).to eq(0) }
+    it { expect(response).to redirect_to tweets_path }
+
+  end
+
 end

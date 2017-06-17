@@ -5,10 +5,16 @@ Rails.application.routes.draw do
 
   resources :tweets, except: [:new] do
     resources :comments, only: [:new, :create]
+
     collection do
       get :view_followers
       get :view_followees
       get :search_tag
+    end
+
+    member do
+      post :like
+      delete :unlike
     end
   end
 
@@ -17,5 +23,4 @@ Rails.application.routes.draw do
       resources :followings, only: [:create, :destroy]
     end
   end
-
 end
