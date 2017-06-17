@@ -23,7 +23,11 @@ class TweetsController < ApplicationController
     respond_to do |format|
       if @tweet.save
         @tags.each do |tag|
-          new_tag = @tweet.tags.create(text: tag)
+          if existing_tag = Tag.find_by(text: tag)
+            
+          else
+            new_tag = @tweet.tags.create(text: tag)
+          end
         end
         format.html { redirect_to tweets_path }
         format.js
@@ -41,7 +45,6 @@ class TweetsController < ApplicationController
     if current_user.id != @tweet.user.id
       redirect_to tweets_path
     end
-
   end
 
   def update
@@ -90,12 +93,15 @@ class TweetsController < ApplicationController
     @body << ' '
 
     while @body.include?('#')
-      tag_start = @body.index('#')
+      tag_start = @body.rindex('#')
+      @body.insert(tag_start,' ')
+      tag_start += 1
       tag_end = @body.index(' ',tag_start)
       tag_length = tag_end - tag_start
 
       @tags << @body.slice!(tag_start, tag_length)
     end
+    @tags.reverse!
   end
 
   def sanitize_tags
