@@ -93,7 +93,7 @@ class TweetsController < ApplicationController
 
     @like = Like.find_by(tweet: params[:id], user: current_user)
     @like.destroy
-    redirect_to tweets_path
+
     respond_to do |format|
       format.html { redirect_to tweets_path }
       format.js

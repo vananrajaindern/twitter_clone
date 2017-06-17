@@ -18,7 +18,8 @@
           <%= link_to ' #' + tag, search_tag_tweets_path(tag) %>
          <% end %> <br/>
 
-         at <%= tweet.updated_at %> <br/>
+         Likes: <%= tweet.likes.count %>    Posted on <%= tweet.updated_at %> <br/>
+
 
        </div>
      </div>
