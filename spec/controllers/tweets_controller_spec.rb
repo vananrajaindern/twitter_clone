@@ -44,6 +44,14 @@ RSpec.describe TweetsController, type: :controller do
 
       end
 
+      context 'when tweet#save passes and tweet contains tag' do
+
+        let(:params) { attributes_for(:tweet, :tagged) }
+
+        it { expect(Tag.count).to eq(1) }
+
+      end
+
       context 'when tweet#save fails' do
 
         let(:params) { attributes_for(:tweet, :invalid) }
@@ -139,5 +147,16 @@ RSpec.describe TweetsController, type: :controller do
     it { expect(assigns(:followees).first).to eq(following) }
 
   end
+
+  # describe 'GET #search_tag' do
+  #
+  #   let(:tweet) { create(:tweet) }
+  #   let(:tag) { create(:tag, tweet: tweet) }
+  #
+  #   before { get :search_tag, params: { format: 'tagged' } }
+  #
+  #   it { expect(assigns(:tweets).first).to eq(tweet) }
+  #
+  # end
 
 end

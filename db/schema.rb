@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607063616) do
+ActiveRecord::Schema.define(version: 20170616031924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,21 @@ ActiveRecord::Schema.define(version: 20170607063616) do
     t.index ["tweet_id"], name: "index_likes_on_tweet_id"
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string "text", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tags_tweets", id: false, force: :cascade do |t|
+    t.bigint "tweet_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_tags_tweets_on_tag_id"
+    t.index ["tweet_id"], name: "index_tags_tweets_on_tweet_id"
+  end
+
   create_table "tweets", force: :cascade do |t|
     t.bigint "user_id"
     t.string "text"
@@ -67,8 +82,10 @@ ActiveRecord::Schema.define(version: 20170607063616) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username"
   end
 
   add_foreign_key "comments", "tweets"
@@ -76,5 +93,7 @@ ActiveRecord::Schema.define(version: 20170607063616) do
   add_foreign_key "followings", "users", column: "followee_id"
   add_foreign_key "followings", "users", column: "follower_id"
   add_foreign_key "likes", "tweets"
+  add_foreign_key "tags_tweets", "tags"
+  add_foreign_key "tags_tweets", "tweets"
   add_foreign_key "tweets", "users"
 end

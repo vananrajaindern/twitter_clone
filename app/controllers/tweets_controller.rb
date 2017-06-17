@@ -17,8 +17,14 @@ class TweetsController < ApplicationController
     @users = User.all
     @tweet = current_user.tweets.build(tweet_params)
 
+    identify_tags
+    sanitize_tags
+
     respond_to do |format|
       if @tweet.save
+        @tags.each do |tag|
+          new_tag = @tweet.tags.create(text: tag)
+        end
         format.html { redirect_to tweets_path }
         format.js
       else
@@ -35,7 +41,6 @@ class TweetsController < ApplicationController
     if current_user.id != @tweet.user.id
       redirect_to tweets_path
     end
-
   end
 
   def update
@@ -63,6 +68,11 @@ class TweetsController < ApplicationController
     @followees = Following.where(followee_id: current_user.id)
   end
 
+  def search_tag
+    @tag = Tag.find_by(text: params[:format])
+    @tweets = @tag.tweets
+  end
+
   private
 
   def tweet_params
@@ -71,6 +81,30 @@ class TweetsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:text, :tweet_id)
+  end
+
+  def identify_tags
+    @body = params[:tweet][:text]
+    @tags = []
+    @body << ' '
+
+    while @body.include?('#')
+      tag_start = @body.rindex('#')
+      @body.insert(tag_start,' ')
+      tag_start += 1
+      tag_end = @body.index(' ',tag_start)
+      tag_length = tag_end - tag_start
+
+      @tags << @body.slice!(tag_start, tag_length)
+    end
+    @tags.reverse!
+  end
+
+  def sanitize_tags
+    @tags.each do |tag|
+      tag.delete!('#')
+      tag.upcase
+    end
   end
 
 end
