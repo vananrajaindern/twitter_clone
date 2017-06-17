@@ -73,6 +73,33 @@ class TweetsController < ApplicationController
     @tweets = @tag.tweets
   end
 
+  def like
+    @tweets = Tweet.all
+    @users = User.all
+
+    @tweet = Tweet.find(params[:id])
+    @like = current_user.likes.build(tweet: @tweet)
+    @like.save
+
+    respond_to do |format|
+      format.html { redirect_to tweets_path }
+      format.js
+    end
+  end
+
+  def unlike
+    @tweets = Tweet.all
+    @users = User.all
+
+    @like = Like.find_by(tweet: params[:id], user: current_user)
+    @like.destroy
+    redirect_to tweets_path
+    respond_to do |format|
+      format.html { redirect_to tweets_path }
+      format.js
+    end
+  end
+
   private
 
   def tweet_params

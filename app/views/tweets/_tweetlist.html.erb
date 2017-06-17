@@ -5,7 +5,7 @@
          <% if tweet.user.avatar.url.present? %>
          <%= image_tag tweet.user.avatar.url, size: "100x100", class: "img-circle" %>
          <% else %>
-         <%= image_tag "default.jpg", size: "100x100", class: "img-circle" %>
+         <!-- <%= image_tag "default.jpg", size: "100x100", class: "img-circle" %> -->
          <% end %>
 
          <%= link_to tweet.user.username, profile_path(tweet.user.username), class: "center-block" %>
@@ -31,7 +31,16 @@
           <%= link_to edit_tweet_path(tweet) do %> <button type="button" class="btn btn-default">Edit</button> <% end %>
           <%= link_to tweet_path(tweet), method: :delete, remote: true do %> <button type="button" class="btn btn-danger pull-right">Delete</button> <% end %>
           <!-- , data: { confirm: "Are you sure you wish to permanently delete this tweet?" } %> -->
+        <% else %>
+          <% if current_user.likes?(tweet, current_user) %>
+            <%= link_to unlike_tweet_path(tweet), method: :delete, remote: true do %> <button type="button" class="btn btn-danger">You liked this! Unlike</button> <% end %>
+          <% else %>
+            <%= link_to like_tweet_path(tweet), method: :post, remote: true do %> <button type="button" class="btn btn-success">Like this tweet</button> <% end %>
+          <% end %>
         <% end %>
+
+
+
 
       </div>
 
